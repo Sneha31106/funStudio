@@ -19,24 +19,26 @@ if (cursorGlow) {
 // -- FLOATING SPARKLES --
 const createSparkles = () => {
   const colors = [
-    'rgba(255, 182, 193, 0.9)', // baby pink
-    'rgba(144, 238, 144, 0.9)', // light green
-    'rgba(224, 224, 230, 0.9)'  // shiny silver
+    '#ffb6c1', // baby pink
+    '#90ee90', // light green
+    '#c0c0c0'  // shiny silver
   ];
+  const shapes = ['✦', '✧', '✨'];
   const sparkleCount = 40;
 
   for (let i = 0; i < sparkleCount; i++) {
     const sparkle = document.createElement('div');
     sparkle.classList.add('sparkle');
+    sparkle.innerText = shapes[Math.floor(Math.random() * shapes.length)];
 
-    const size = Math.random() * 12 + 6; // 6px to 18px
+    // font size instead of width/height for text stars
+    const size = Math.random() * 20 + 10; // 10px to 30px
     const left = Math.random() * 100; // 0 to 100vw
     const duration = Math.random() * 15 + 10; // 10s to 25s
     const delay = Math.random() * 20;
 
     sparkle.style.color = colors[Math.floor(Math.random() * colors.length)];
-    sparkle.style.width = `${size}px`;
-    sparkle.style.height = `${size}px`;
+    sparkle.style.fontSize = `${size}px`;
     sparkle.style.left = `${left}vw`;
     sparkle.style.animationDuration = `${duration}s, 4s`;
     sparkle.style.animationDelay = `${delay}s, ${Math.random() * 4}s`;

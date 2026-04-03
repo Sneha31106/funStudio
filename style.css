@@ -41,7 +41,7 @@ body {
   height: 500px;
   border-radius: 50%;
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
   /* Centered transform to make top/left the center of the glow */
   transform: translate(-50%, -50%);
   background: radial-gradient(circle, rgba(255, 182, 193, 0.4) 0%, rgba(144, 238, 144, 0.3) 40%, transparent 70%);
@@ -52,6 +52,8 @@ body {
 }
 
 #app {
+  position: relative;
+  z-index: 10;
   max-width: 1200px;
   margin: 0 auto;
   padding: 100px 20px;
@@ -64,19 +66,22 @@ body {
 
 .app-header h1 {
   font-family: var(--font-display);
-  /* Using Cinzel for an ultra-rich classic vibe */
-  font-weight: 600;
-  font-size: 3.5rem;
-  letter-spacing: 0.02em;
-  margin-bottom: 16px;
+  font-weight: 900;
+  font-size: 5rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
 
-  /* Silver/Metallic rich text effect */
-  background: linear-gradient(135deg, #8e8e93 0%, #e5e5ea 30%, #48484a 55%, #c7c7cc 80%, #636366 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  /* Pure Dark Black */
+  color: #000000;
+
+  /* Very subtle grounded shadow for depth, no silver */
+  text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+
+  /* Clear previous gradient stuff */
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: initial;
+  background-clip: unset;
 }
 
 .app-header p {
@@ -358,10 +363,15 @@ body {
   position: fixed;
   pointer-events: none;
   z-index: 0;
-  /* above cursor glow, behind cards */
-  clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
-  background: currentColor;
+  /* Behind actual content but visible on background */
+  background: none;
   animation: floatUp 15s linear infinite, twinkle 4s ease-in-out infinite;
+  text-shadow: 0 0 15px currentColor, 0 0 30px currentColor;
+  /* powerful glow */
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes floatUp {
@@ -392,7 +402,8 @@ body {
   }
 
   50% {
-    filter: drop-shadow(0 0 8px currentColor) brightness(1.5);
+    filter: drop-shadow(0 0 15px currentColor) brightness(1.5);
+    opacity: 0.6;
   }
 }
 
