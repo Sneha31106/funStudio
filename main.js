@@ -18,6 +18,9 @@ if (cursorGlow) {
 
 // -- FLOATING SPARKLES --
 const createSparkles = () => {
+  // Clear any existing stars (prevents duplicates during HMR)
+  document.querySelectorAll('.sparkle').forEach(el => el.remove());
+
   const colors = [
     '#ffb6c1', // baby pink
     '#90ee90', // light green

@@ -362,8 +362,8 @@ body {
 .sparkle {
   position: fixed;
   pointer-events: none;
-  z-index: 0;
-  /* Behind actual content but visible on background */
+  z-index: 9999;
+  /* Bring stars in front */
   background: none;
   animation: floatUp 15s linear infinite, twinkle 4s ease-in-out infinite;
   text-shadow: 0 0 15px currentColor, 0 0 30px currentColor;
@@ -402,8 +402,7 @@ body {
   }
 
   50% {
-    filter: drop-shadow(0 0 15px currentColor) brightness(1.5);
-    opacity: 0.6;
+    filter: drop-shadow(0 0 15px currentColor) brightness(1.7);
   }
 }
 
