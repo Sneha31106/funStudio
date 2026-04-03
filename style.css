@@ -2,14 +2,15 @@
   --bg-color: #f7f7f8;
   --text-main: #111111;
   --text-muted: #666666;
-  --accent: #2e6b5d; /* Jewel toned emerald accent */
+  --accent: #2e6b5d;
+  /* Jewel toned emerald accent */
   --card-bg: rgba(255, 255, 255, 0.7);
   --card-border: rgba(255, 255, 255, 0.4);
-  --shadow: 0 10px 40px rgba(0,0,0,0.05);
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
 
   --font-serif: 'Lora', serif;
   --font-sans: 'Inter', sans-serif;
-  
+
   --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: 0.3s ease;
 }
@@ -21,7 +22,7 @@
 }
 
 body {
-  background-color: var(--bg-color);
+  background-color: #ffffff;
   color: var(--text-main);
   font-family: var(--font-sans);
   line-height: 1.6;
@@ -30,22 +31,23 @@ body {
   min-height: 100vh;
 }
 
-/* Background Ethereal Gradient */
-.bg-gradient {
+/* Cursor Follower Glow */
+#cursor-glow {
   position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 50% 50%, rgba(131, 230, 203, 0.1) 0%, rgba(205, 151, 246, 0.05) 30%, transparent 70%);
-  z-index: -1;
-  animation: liquidGradient 30s ease-in-out infinite alternate;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
   pointer-events: none;
-}
-
-@keyframes liquidGradient {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(5%, 5%) scale(1.1); }
+  z-index: -1;
+  /* Centered transform to make top/left the center of the glow */
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 182, 193, 0.4) 0%, rgba(144, 238, 144, 0.3) 40%, transparent 70%);
+  filter: blur(60px);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  will-change: left, top;
 }
 
 #app {
@@ -95,15 +97,38 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: var(--shadow);
-  transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow), border-color var(--transition-slow);
   opacity: 0;
   transform: translateY(30px);
   animation: fadeUpIn 1.2s var(--transition-slow) forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Beautiful modern glass shine effect */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: skewX(-25deg);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card:hover::before {
+  left: 200%;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08), 0 0 30px rgba(255, 182, 193, 0.2);
+  border-color: rgba(144, 238, 144, 0.5);
+  /* slight green/pink tint on hover border */
 }
 
 .fade-up {
@@ -142,7 +167,7 @@ body {
   justify-content: center;
   margin-bottom: 30px;
   border-radius: 12px;
-  background: rgba(0,0,0,0.02);
+  background: rgba(0, 0, 0, 0.02);
   padding: 20px;
   text-align: center;
   transition: all var(--transition-fast);
@@ -155,35 +180,81 @@ body {
 }
 
 /* UI Elements inside cards */
-.dog-image, .user-avatar {
+.dog-image,
+.user-avatar {
   max-width: 100%;
   max-height: 200px;
   border-radius: 12px;
   object-fit: cover;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   animation: dissolveIn 0.8s ease forwards;
 }
 
-.breed-label, .user-info, .joke-text, .post-text {
+.breed-label,
+.user-info,
+.joke-text,
+.post-text {
   margin-top: 15px;
   font-size: 0.95rem;
   color: var(--text-main);
   animation: dissolveIn 0.8s ease forwards;
 }
 
-.joke-setup { font-weight: 500; margin-bottom: 8px; }
-.joke-punchline { font-weight: 300; font-style: italic; color: var(--text-muted); }
+.joke-setup {
+  font-weight: 500;
+  margin-bottom: 8px;
+}
 
-.user-name { font-family: var(--font-serif); font-size: 1.2rem; margin-top: 10px; }
-.user-detail { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+.joke-punchline {
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-muted);
+}
 
-.post-title { font-weight: 500; margin-bottom: 10px; text-transform: capitalize; }
-.post-body { font-size: 0.9rem; color: var(--text-muted); text-align: left; }
-.post-id { font-size: 0.75rem; color: #aaa; margin-bottom: 10px; display: block; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; }
+.user-name {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.user-detail {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.post-title {
+  font-weight: 500;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+
+.post-body {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.post-id {
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-bottom: 10px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
 
 @keyframes dissolveIn {
-  from { opacity: 0; transform: scale(0.98); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Buttons */
@@ -209,7 +280,7 @@ body {
 .btn-primary {
   background: var(--text-main);
   color: #fff;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary:hover {
@@ -225,19 +296,19 @@ body {
 .btn-secondary {
   background: transparent;
   color: var(--text-main);
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .btn-secondary:hover {
-  background: rgba(0,0,0,0.03);
-  border-color: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 .app-footer {
   text-align: center;
   margin-top: 80px;
   padding-top: 40px;
-  border-top: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
   color: var(--text-muted);
   font-size: 0.85rem;
   font-weight: 300;
@@ -248,14 +319,16 @@ body {
 .loading-spinner {
   width: 24px;
   height: 24px;
-  border: 2px solid rgba(0,0,0,0.1);
+  border: 2px solid rgba(0, 0, 0, 0.1);
   border-top-color: var(--accent);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .error-text {

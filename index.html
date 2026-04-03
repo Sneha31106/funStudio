@@ -1,94 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Public API Playground</title>
-    <!-- Use Google Fonts: 'Lora' for elegant serif headers, 'Inter' for body -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <!-- App Container -->
-    <div id="app">
-      <!-- Header -->
-      <header class="app-header fade-up">
-        <h1>Public API Playground</h1>
-        <p>A curated experience of living intelligence and refined data.</p>
-      </header>
 
-      <!-- Main Content -->
-      <main class="app-main">
-        
-        <!-- Dog Finder Card -->
-        <section class="card fade-up" id="dog-card">
-          <div class="card-content">
-            <h2 class="card-title">Dog Finder</h2>
-            <p class="card-desc">Discover canine companionship with a single click.</p>
-            <div class="card-display" id="dog-display">
-              <!-- Placeholder for content -->
-              <span class="placeholder-text">Awaiting inquiry...</span>
-            </div>
-          </div>
-          <div class="card-actions">
-            <button class="btn btn-primary" id="btn-dog">Get Dog</button>
-            <button class="btn btn-secondary" id="btn-dog-copy" style="display:none;">Copy Image URL</button>
-          </div>
-        </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Public API Playground</title>
+  <!-- Use Google Fonts: 'Lora' for elegant serif headers, 'Inter' for body -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
 
-        <!-- Joke Generator Card -->
-        <section class="card fade-up" id="joke-card" style="transition-delay: 0.1s;">
-          <div class="card-content">
-            <h2 class="card-title">Joke Generator</h2>
-            <p class="card-desc">A subtle curation of algorithmic humor.</p>
-            <div class="card-display" id="joke-display">
-              <span class="placeholder-text">Awaiting inquiry...</span>
-            </div>
-          </div>
-          <div class="card-actions">
-            <button class="btn btn-primary" id="btn-joke">Get Joke</button>
-            <button class="btn btn-secondary" id="btn-joke-next" style="display:none;">Next Joke</button>
-          </div>
-        </section>
+<body>
+  <!-- App Container -->
+  <div id="app">
+    <!-- Header -->
+    <header class="app-header fade-up">
+      <h1>Public API Playground</h1>
+      <p>A curated experience of living intelligence and refined data.</p>
+    </header>
 
-        <!-- Random User Profile Card -->
-        <section class="card fade-up" id="user-card" style="transition-delay: 0.2s;">
-          <div class="card-content">
-            <h2 class="card-title">Random User Profile</h2>
-            <p class="card-desc">Glimpse into a synthetic identity.</p>
-            <div class="card-display" id="user-display">
-              <span class="placeholder-text">Awaiting inquiry...</span>
-            </div>
-          </div>
-          <div class="card-actions">
-            <button class="btn btn-primary" id="btn-user">Get User</button>
-          </div>
-        </section>
+    <!-- Main Content -->
+    <main class="app-main">
 
-        <!-- Data Nexus Card (JSONPlaceholder) -->
-        <section class="card fade-up" id="post-card" style="transition-delay: 0.3s;">
-          <div class="card-content">
-            <h2 class="card-title">Data Explorer</h2>
-            <p class="card-desc">Query structured lorem ipsum artifacts.</p>
-            <div class="card-display" id="post-display">
-              <span class="placeholder-text">Awaiting inquiry...</span>
-            </div>
+      <!-- Dog Finder Card -->
+      <section class="card fade-up" id="dog-card">
+        <div class="card-content">
+          <h2 class="card-title">Dog Finder</h2>
+          <p class="card-desc">Discover canine companionship with a single click.</p>
+          <div class="card-display" id="dog-display">
+            <!-- Placeholder for content -->
+            <span class="placeholder-text">Awaiting inquiry...</span>
           </div>
-          <div class="card-actions">
-            <button class="btn btn-primary" id="btn-post">Fetch Data</button>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary" id="btn-dog">Get Dog</button>
+          <button class="btn btn-secondary" id="btn-dog-copy" style="display:none;">Copy Image URL</button>
+        </div>
+      </section>
+
+      <!-- Joke Generator Card -->
+      <section class="card fade-up" id="joke-card" style="transition-delay: 0.1s;">
+        <div class="card-content">
+          <h2 class="card-title">Joke Generator</h2>
+          <p class="card-desc">A subtle curation of algorithmic humor.</p>
+          <div class="card-display" id="joke-display">
+            <span class="placeholder-text">Awaiting inquiry...</span>
           </div>
-        </section>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary" id="btn-joke">Get Joke</button>
+          <button class="btn btn-secondary" id="btn-joke-next" style="display:none;">Next Joke</button>
+        </div>
+      </section>
 
-      </main>
+      <!-- Random User Profile Card -->
+      <section class="card fade-up" id="user-card" style="transition-delay: 0.2s;">
+        <div class="card-content">
+          <h2 class="card-title">Random User Profile</h2>
+          <p class="card-desc">Glimpse into a synthetic identity.</p>
+          <div class="card-display" id="user-display">
+            <span class="placeholder-text">Awaiting inquiry...</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary" id="btn-user">Get User</button>
+        </div>
+      </section>
 
-      <footer class="app-footer">
-        <p>&copy; 2026 AI Concierge Services. Crafted with restraint and precision.</p>
-      </footer>
-    </div>
-    
-    <!-- Iridescent background gradient layer -->
-    <div class="bg-gradient"></div>
+      <!-- Data Nexus Card (JSONPlaceholder) -->
+      <section class="card fade-up" id="post-card" style="transition-delay: 0.3s;">
+        <div class="card-content">
+          <h2 class="card-title">Data Explorer</h2>
+          <p class="card-desc">Query structured lorem ipsum artifacts.</p>
+          <div class="card-display" id="post-display">
+            <span class="placeholder-text">Awaiting inquiry...</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary" id="btn-post">Fetch Data</button>
+        </div>
+      </section>
 
-    <script type="module" src="/main.js"></script>
-  </body>
+    </main>
+
+    <footer class="app-footer">
+      <p>&copy; 2026 AI Concierge Services. Crafted with restraint and precision.</p>
+    </footer>
+  </div>
+
+  <!-- Cursor follower glow -->
+  <div id="cursor-glow"></div>
+
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>

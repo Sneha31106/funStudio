@@ -1,5 +1,21 @@
 import './style.css'
 
+// -- CURSOR GLOW --
+const cursorGlow = document.getElementById('cursor-glow');
+if (cursorGlow) {
+  document.addEventListener('mousemove', (e) => {
+    cursorGlow.style.opacity = '1';
+    requestAnimationFrame(() => {
+      cursorGlow.style.left = `${e.clientX}px`;
+      cursorGlow.style.top = `${e.clientY}px`;
+    });
+  });
+
+  document.addEventListener('mouseleave', () => {
+    cursorGlow.style.opacity = '0';
+  });
+}
+
 // -- UTILS --
 const showLoading = (elementId) => {
   const el = document.getElementById(elementId);
@@ -19,14 +35,14 @@ let currentDogUrl = '';
 const fetchDog = async () => {
   const displayEl = 'dog-display';
   showLoading(displayEl);
-  
+
   try {
     const res = await fetch('https://dog.ceo/api/breeds/image/random');
     if (!res.ok) throw new Error('Failed to fetch dog image');
     const data = await res.json();
-    
+
     currentDogUrl = data.message;
-    
+
     // Extract breed from URL (format: /breeds/breed-name/...)
     const breedMatch = currentDogUrl.match(/breeds\/([^/]+)/);
     let breedName = 'Unknown Breed';
@@ -35,16 +51,16 @@ const fetchDog = async () => {
       // Capitalize first letter of each word
       breedName = breedName.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
     }
-    
+
     const container = document.getElementById(displayEl);
     container.innerHTML = `
       <img src="${currentDogUrl}" alt="${breedName}" class="dog-image" />
       <span class="breed-label">${breedName}</span>
     `;
-    
+
     // Show copy button
     document.getElementById('btn-dog-copy').style.display = 'inline-block';
-    
+
   } catch (error) {
     showError(displayEl, 'Could not retrieve a dog image at this moment.');
   }
@@ -58,7 +74,7 @@ const copyDogUrl = async () => {
     const originalText = btn.innerText;
     btn.innerText = 'Copied!';
     setTimeout(() => { btn.innerText = originalText; }, 2000);
-  } catch(err) {
+  } catch (err) {
     console.error('Failed to copy text: ', err);
   }
 };
@@ -73,12 +89,12 @@ document.getElementById('btn-dog-copy').addEventListener('click', copyDogUrl);
 const fetchJoke = async () => {
   const displayEl = 'joke-display';
   showLoading(displayEl);
-  
+
   try {
     const res = await fetch('https://official-joke-api.appspot.com/random_joke');
     if (!res.ok) throw new Error('Failed to fetch joke');
     const data = await res.json();
-    
+
     const container = document.getElementById(displayEl);
     container.innerHTML = `
       <div class="joke-text">
@@ -86,7 +102,7 @@ const fetchJoke = async () => {
         <p class="joke-punchline">${data.punchline}</p>
       </div>
     `;
-    
+
     document.getElementById('btn-joke-next').style.display = 'inline-block';
     // Hide the primary button and replace functionality with the secondary button
     document.getElementById('btn-joke').style.display = 'none';
@@ -106,15 +122,15 @@ document.getElementById('btn-joke-next').addEventListener('click', fetchJoke);
 const fetchUser = async () => {
   const displayEl = 'user-display';
   showLoading(displayEl);
-  
+
   try {
     const res = await fetch('https://randomuser.me/api/');
     if (!res.ok) throw new Error('Failed to fetch user');
     const data = await res.json();
-    
+
     const user = data.results[0];
     const fullName = `${user.name.first} ${user.name.last}`;
-    
+
     const container = document.getElementById(displayEl);
     container.innerHTML = `
       <img src="${user.picture.large}" alt="${fullName}" class="user-avatar" />
@@ -123,7 +139,7 @@ const fetchUser = async () => {
       <p class="user-detail">${user.location.country} • Age: ${user.dob.age}</p>
       <p class="user-detail">${user.phone}</p>
     `;
-    
+
   } catch (error) {
     showError(displayEl, 'Could not retrieve an identity profile.');
   }
@@ -138,14 +154,14 @@ document.getElementById('btn-user').addEventListener('click', fetchUser);
 const fetchPost = async () => {
   const displayEl = 'post-display';
   showLoading(displayEl);
-  
+
   try {
     // Fetch a random post between 1 and 100
     const randomId = Math.floor(Math.random() * 100) + 1;
     const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${randomId}`);
     if (!res.ok) throw new Error('Failed to fetch data');
     const data = await res.json();
-    
+
     const container = document.getElementById(displayEl);
     container.innerHTML = `
       <div class="post-text">
@@ -154,7 +170,7 @@ const fetchPost = async () => {
         <p class="post-body">${data.body}</p>
       </div>
     `;
-    
+
   } catch (error) {
     showError(displayEl, 'Data fetch failed.');
   }
