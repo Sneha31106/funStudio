@@ -16,6 +16,36 @@ if (cursorGlow) {
   });
 }
 
+// -- FLOATING SPARKLES --
+const createSparkles = () => {
+  const colors = [
+    'rgba(255, 182, 193, 0.9)', // baby pink
+    'rgba(144, 238, 144, 0.9)', // light green
+    'rgba(224, 224, 230, 0.9)'  // shiny silver
+  ];
+  const sparkleCount = 40;
+
+  for (let i = 0; i < sparkleCount; i++) {
+    const sparkle = document.createElement('div');
+    sparkle.classList.add('sparkle');
+
+    const size = Math.random() * 12 + 6; // 6px to 18px
+    const left = Math.random() * 100; // 0 to 100vw
+    const duration = Math.random() * 15 + 10; // 10s to 25s
+    const delay = Math.random() * 20;
+
+    sparkle.style.color = colors[Math.floor(Math.random() * colors.length)];
+    sparkle.style.width = `${size}px`;
+    sparkle.style.height = `${size}px`;
+    sparkle.style.left = `${left}vw`;
+    sparkle.style.animationDuration = `${duration}s, 4s`;
+    sparkle.style.animationDelay = `${delay}s, ${Math.random() * 4}s`;
+
+    document.body.appendChild(sparkle);
+  }
+};
+createSparkles();
+
 // -- UTILS --
 const showLoading = (elementId) => {
   const el = document.getElementById(elementId);
