@@ -1,0 +1,272 @@
+:root {
+  --bg-color: #f7f7f8;
+  --text-main: #111111;
+  --text-muted: #666666;
+  --accent: #2e6b5d; /* Jewel toned emerald accent */
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(255, 255, 255, 0.4);
+  --shadow: 0 10px 40px rgba(0,0,0,0.05);
+
+  --font-serif: 'Lora', serif;
+  --font-sans: 'Inter', sans-serif;
+  
+  --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Background Ethereal Gradient */
+.bg-gradient {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(131, 230, 203, 0.1) 0%, rgba(205, 151, 246, 0.05) 30%, transparent 70%);
+  z-index: -1;
+  animation: liquidGradient 30s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes liquidGradient {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(5%, 5%) scale(1.1); }
+}
+
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 20px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.app-header h1 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 3rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  color: var(--text-main);
+}
+
+.app-header p {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.app-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+}
+
+/* Card Styling for Luxury Minimalism */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow);
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUpIn 1.2s var(--transition-slow) forwards;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUpIn 1.2s var(--transition-slow) forwards;
+}
+
+@keyframes fadeUpIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.7rem;
+  margin-bottom: 8px;
+}
+
+.card-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+.card-display {
+  flex-grow: 1;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.02);
+  padding: 20px;
+  text-align: center;
+  transition: all var(--transition-fast);
+}
+
+.placeholder-text {
+  font-style: italic;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+/* UI Elements inside cards */
+.dog-image, .user-avatar {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  animation: dissolveIn 0.8s ease forwards;
+}
+
+.breed-label, .user-info, .joke-text, .post-text {
+  margin-top: 15px;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  animation: dissolveIn 0.8s ease forwards;
+}
+
+.joke-setup { font-weight: 500; margin-bottom: 8px; }
+.joke-punchline { font-weight: 300; font-style: italic; color: var(--text-muted); }
+
+.user-name { font-family: var(--font-serif); font-size: 1.2rem; margin-top: 10px; }
+.user-detail { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+
+.post-title { font-weight: 500; margin-bottom: 10px; text-transform: capitalize; }
+.post-body { font-size: 0.9rem; color: var(--text-muted); text-align: left; }
+.post-id { font-size: 0.75rem; color: #aaa; margin-bottom: 10px; display: block; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; }
+
+@keyframes dissolveIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Buttons */
+.card-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 400;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition-fast);
+  letter-spacing: 0.02em;
+}
+
+.btn-primary {
+  background: var(--text-main);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.btn-primary:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 107, 93, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.btn-secondary:hover {
+  background: rgba(0,0,0,0.03);
+  border-color: rgba(0,0,0,0.2);
+}
+
+.app-footer {
+  text-align: center;
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+/* Loading State */
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(0,0,0,0.1);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-text {
+  color: #b00020;
+  font-size: 0.9rem;
+  animation: dissolveIn 0.3s ease forwards;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app-header h1 {
+    font-size: 2.2rem;
+  }
+}
